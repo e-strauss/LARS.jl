@@ -291,7 +291,7 @@ function lars(X::Matrix{T}, y::Vector{T}; method::Symbol=:lasso,
                 # We'll 'drop for good' the last regressor added
                 @warn "Regressors in active set degenerate. Dropping a regressor, after $niter iterations, i.e. λ=$(lambda), with an active set of $nactive regressors, and the smallest cholesky pivot element being $(diag)"
                 # XXX: need to figure a 'drop for good' way
-                unshift!(Cov, removed_Cov)
+                pushfirst!(Cov, removed_Cov)
                 Cov[1] = Cov[C_idx]
                 Cov[C_idx] = 0
                 continue
